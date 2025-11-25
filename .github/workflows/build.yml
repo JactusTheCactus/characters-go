@@ -9,9 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: ./.sh
-      - uses: charmbracelet/vhs-action@v1
-        with:
-          path: main.tape
+      # - uses: charmbracelet/vhs-action@v1
+      #   with:
+      #     path: main.tape
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update
