@@ -15,7 +15,7 @@ Wait+Screen /Pick a character/
 Sleep 5s
 Right
 Wait+Screen /</
-Sleep 5s
+Sleep 10s
 Screenshot Hound.png
 Left
 Sleep 1s
@@ -23,5 +23,5 @@ Down
 Sleep 1s
 Right
 Wait+Screen /</
-Sleep 5s
+Sleep 10s
 Screenshot Morrigan.png
