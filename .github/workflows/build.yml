@@ -1,0 +1,22 @@
+name: VHS
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: ./.sh
+      - uses: charmbracelet/vhs-action@v1
+        with:
+          path: main.tape
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update
+          branch: main
+          commit_user_name: GitHub-Bot
+          commit_user_email: actions@github.com
+          commit_author: GitHub-Bot <actions@github.com>
+          file_pattern: "."

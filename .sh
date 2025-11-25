@@ -8,5 +8,5 @@ flag() {
 go mod tidy
 go build
 if flag local; then
-	: #./main
+	vhs main.tape
 fi

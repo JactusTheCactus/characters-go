@@ -14,24 +14,20 @@ import (
 func cap(s string) string {
 	return cases.Title(language.English, cases.NoLower).String(s)
 }
-func uni(u string) string {
-	var err error
-	u, err = strconv.Unquote(`"` + u + `"`)
-	if err != nil {
-		fmt.Println(err)
-	}
-	return u
+func uni(hex int) string {
+	r, _ := strconv.ParseInt(fmt.Sprintf("%v", hex), 0, 32)
+	return string(rune(r))
 }
 
 var u = map[string]string{
-	"dot":    uni(`\u00B7`),
-	"male":   uni(`\u2642`),
-	"female": uni(`\u2640`),
-	"neuter": uni(`\u26A5`),
-	"acute":  uni(`\u0301`),
-	"grave":  uni(`\u0300`),
-	"omega":  uni(`\u03C9`),
-	"schwa":  uni(`\u0259`),
+	"dot":    uni(0x00B7),
+	"male":   uni(0x2642),
+	"female": uni(0x2640),
+	"neuter": uni(0x26A5),
+	"acute":  uni(0x0301),
+	"grave":  uni(0x0300),
+	"omega":  uni(0x03C9),
+	"schwa":  uni(0x0259),
 }
 
 type Char struct {
@@ -117,7 +113,7 @@ var chars = []Char{
 			"Morrigan",
 		},
 		[]string{
-			fmt.Sprint("M", u["omega"], u["acute"], "r", u["schwa"], "gy", u["grave"], "n"),
+			fmt.Sprint("m", u["omega"], u["acute"], "r", u["schwa"], "gy", u["grave"], "n"),
 		},
 		[]string{
 			"Reaper",
@@ -146,26 +142,21 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "q",
 			"esc":
 			return m, tea.Quit
-		case "up",
-			"w":
+		case "up":
 			if m.cursor > 0 {
 				m.cursor--
 			} else {
 				m.cursor = len(chars) - 1
 			}
-		case "down",
-			"s":
+		case "down":
 			if m.cursor < len(chars)-1 {
 				m.cursor++
 			} else {
 				m.cursor = 0
 			}
-		case "enter",
-			" ",
+		case " ",
 			"left",
-			"a",
-			"right",
-			"d":
+			"right":
 			if m.selected == m.cursor && m.char.exists() {
 				m.chosen = !m.chosen
 				m.char = Char{}
