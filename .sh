@@ -5,8 +5,8 @@ flag() {
 		[[ -e ".flags/$f" ]] || return 1
 	done
 }
+go mod tidy
+go build
 if flag local; then
-	:
-else
-	:
+	: #./main
 fi

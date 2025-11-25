@@ -6,7 +6,8 @@
 		"showReuseMessage": false,
 		"clear": true,
 		"close": true,
-		"preserveTerminalName": true
+		"preserveTerminalName": true,
+		"focus": true
 	},
 	"tasks": [
 		{
